@@ -75,4 +75,25 @@ public class AccountServiceTest {
         Mockito.verify(accountRepository).save(account);
         Mockito.verify(accountDtoConverter).convert(account);
     }
+
+    @Test
+
+public void whenCreateAccountCalledWithCustomerWithOutId_itShouldReturnEmptyAccountDto(){
+        CreateAccountRequest createAccountRequest = new CreateAccountRequest("1234");
+        createAccountRequest.setBalance(100);
+        createAccountRequest.setCity(City.İSTANBUL);
+        createAccountRequest.setCustomerId("12345");
+        createAccountRequest.setCurreny(Curreny.TRY);
+
+        Mockito.when(customerService.getCustomerById("12345")).thenReturn(Customer.builder().build());
+
+        AccountDto expectedAccountDto= AccountDto.builder().build();
+        AccountDto result=accountService.createAccount(createAccountRequest);
+        Assert.assertEquals(result,expectedAccountDto);
+        Mockito.verifyNoInteractions(accountRepository);
+        Mockito.verifyNoInteractions(accountDtoConverter);
+
+
+    }
+
 }

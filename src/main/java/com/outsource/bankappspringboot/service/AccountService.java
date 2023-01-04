@@ -33,7 +33,7 @@ public class AccountService {
 
     public AccountDto createAccount(CreateAccountRequest createAccountRequest) {
                 Customer customer=customerService.getCustomerById(createAccountRequest.getCustomerId());
-                if(customer.getId().equals(" ") || customer.getId()==null){
+                if(customer.getId()==null ||customer.getId().equals(" ") ){
                     return AccountDto.builder().build();
                 }
                 Account account=  Account.builder()
