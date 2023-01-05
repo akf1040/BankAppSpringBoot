@@ -10,6 +10,7 @@ import lombok.*;
 @Getter
 @Setter
 @Builder
+@EqualsAndHashCode
 public class CustomerDto {
     private String id;
     private String name;
