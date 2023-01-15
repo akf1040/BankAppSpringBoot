@@ -12,6 +12,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Disabled;
 import org.mockito.Mockito;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -37,6 +42,8 @@ public class CustomerServiceTest {
         createCustomerRequest.setAdress("Adres");
         createCustomerRequest.setDateOfBirth(1991);
 
+
+
         Customer customer = Customer.builder()
                 .id("12345")
                 .name("Akif")
@@ -60,5 +67,12 @@ public class CustomerServiceTest {
         Assert.assertEquals(results,customerDto);
         Mockito.verify(customerRepository).save(customer);
         Mockito.verify(customerDtoConverter).convert(customer);
+    }
+
+
+    @Test
+    public void getAllCustomer(){
+        customerRepository.findAll();
+        Mockito.verify(customerRepository).findAll();
     }
 }

@@ -7,9 +7,9 @@ import com.outsource.bankappspringboot.model.Customer;
 import com.outsource.bankappspringboot.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
@@ -36,7 +36,12 @@ public class CustomerService {
 
     public List<CustomerDto> getAllCustomer() {
         List<Customer> customerList=customerRepository.findAll();
-        return customerList.stream().map(customerDtoConverter::convert).collect(Collectors.toList());
+        List<CustomerDto> customerDtoList= new ArrayList<>();
+        for(Customer customer:customerList){
+             customerDtoList.add(customerDtoConverter.convert(customer));
+        }
+        return  customerDtoList;
+
     }
 
 
